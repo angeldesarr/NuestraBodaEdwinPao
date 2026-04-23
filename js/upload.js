@@ -7,7 +7,7 @@ class PhotoUpload {
     // Verificar si la fecha/hora está permitida para subir fotos
     isUploadAllowed() {
         // Fecha y hora de la boda: 7 de Noviembre 2026, 1:00 PM
-         const allowedDate = new Date('2026-11-07T13:00:00');
+         const allowedDate = new Date('2026-04-21T00:00:00');
         const now = new Date();
         
         // Permitir subir fotos desde el 7 de Noviembre 1:00 PM hasta el 8 de Noviembre 11:59 PM
