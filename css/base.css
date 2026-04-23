@@ -1,0 +1,79 @@
+/* ================================
+   BASE · RESET · TIPOGRAFÍA
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    color: #432818;
+    background-color: #fff;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #432818;
+}
+
+h2 {
+    color: #5a6e46;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+h2 i {
+    color: #d4af37;
+    margin-right: 0.5rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Utilidades */
+.text-center { text-align: center; }
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* =========================
+   FAMILIA ELEGANTE
+========================= */
+
+.family-elegant {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #6b4f3a;
+    line-height: 1.6;
+}
+
+.family-title {
+    margin-top: 1.2rem;
+    font-weight: 600;
+    color: #d4af37;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}

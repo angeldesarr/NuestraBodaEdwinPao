@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Edwin & Pao</title>
+   
+        <!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <!-- CSS :: UNIFICADO -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/effects.css">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- SECCIÓN CONTROL CORTINA (INVISIBLE) -->
+    <div id="curtain-trigger"></div>
+
+<!-- CORTINAS -->
+<div class="curtain-effect">
+    <!-- Fondo que va DETRÁS de las cortinas -->
+    <div class="curtain-background"></div>
+    
+    <div class="curtain-left">
+                <img src="img/derecha.png" alt="Cortina derecha">
+        
+    </div>
+    <div class="curtain-right">
+        <img src="img/izquierda.png" alt="Cortina izquierda">
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-text">Desliza para abrir</div>
+        <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
+    </div>
+</div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="invitation-content">
+
+<!-- PORTADA -->
+<section class="cover-section">
+    <div class="cover-image">
+        
+    </div>
+    <div class="cover-overlay">
+        <h1 class="event-type">Nuestra Boda</h1>
+        <h2 class="couple-names">Edwin García González & Paola Ramirez Tenchil</h2>
+    </div>
+</section>
+
+        <!-- MENSAJE PRINCIPAL -->
+        <section class="section-card">
+            <div class="container">
+                <div class="message-card">
+                    <h3>Con la bendición de Dios</h3>
+                    <p>Hoy seguimos caminando juntos, tomados de la mano y guiados por el mismo amor sincero que desde el primer instante nos unió.</p>
+                    <p>A lo largo de este camino hemos aprendido a crecer, a apoyarnos en cada paso y a descubrir que el verdadero amor se construye día con día, con paciencia, complicidad y sueños compartidos.</p>
+                    <p>Con el corazón lleno de ilusión y gratitud, estamos listos para comenzar una nueva etapa, para escribir el siguiente capítulo de nuestra historia y unir nuestras vidas para siempre.
+                        Por eso, queremos invitarte a ser parte de este momento tan especial, a acompañarnos en el inicio de esta aventura que apenas comienza y a celebrar juntos el amor que hoy nos une.</p>
+                    <div class="signature">Edwin & Paola</div>
+                    <div class="family-elegant">
+                        <p class="family-title">Acompañados de nuestros padres</p>
+                        <p>Tomas García Vázquez & Claudia González Ronzon<br>
+                         María de la Paz Tenchil Cervantes & Israel López Valencia</p>
+                        <p class="family-title">Padrinos de velación</p>
+                        <p>Refugio Tenchil Cervantes & Luz María Peñafiel Gómez</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CEREMONIA -->
+        <section class="ceremony-section" id="ceremonia-iglesia">
+            <div class="ceremony-overlay">
+                <div class="container">
+                    <h2><i class="fas fa-church"></i> Nuestra Ceremonia</h2>
+                    <p class="ceremony-phrase">"Ante Dios y rodeados de quienes más amamos..."</p>
+                    <div class="ceremony-card">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Sábado 07 de Noviembre 2026</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Misa 1:00 PM</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Parroquia de San Lorenzo Almecatla</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-buttons">
+                        <button class="btn btn-calendar" id="btnCalendar"><i class="far fa-calendar-plus"></i> Agendar</button>
+                        <button class="btn btn-maps" id="btnMapsChurch"><i class="fas fa-location-dot"></i> Cómo llegar</button>
+                    </div>
+                    <div class="church-gallery">
+                        <h3><i class="fas fa-images"></i> Nuestro templo</h3>
+                        <div class="gallery-deck">
+                            <div class="deck-container" id="churchDeckContainer"></div>
+                            <div class="gallery-instruction">    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CELEBRACION -->
+        <section class="ceremony-section" id="ceremonia-salon">
+            <div class="ceremony-overlay">
+                <div class="container">
+                    <h2><i class="fas fa-glass-cheers"></i> Nuestra Celebración</h2>
+                    <div class="ceremony-card">
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Celebración 3:00 PM</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Privada Galeana #4<br>San Lorenzo Almecatla, Puebla</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-maps" id="btnMapsVenue"><i class="fas fa-location-dot"></i> Cómo llegar al salón</button>
+                    <div class="venue-gallery">
+                        <h3><i class="fas fa-images"></i> Nuestro salón</h3>
+                        <div class="gallery-deck">
+                            <div class="deck-container" id="venueDeckContainer"></div>
+                            <div class="gallery-instruction">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ITINERARIO -->
+        <section class="section-card itinerary-section">
+            <div class="container">
+                <h2><i class="fas fa-list-alt"></i> Itinerario del Gran Día</h2>
+                <div class="timeline-modern">
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-church"></i></div>
+                        <div class="timeline-content">
+                            <span class="time">1:00pm</span>
+                            <h3>Ceremonia Religiosa</h3>
+                            <p>Parroquia de San Lorenzo Almecatla</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-glass-cheers"></i></div>
+                        <div class="timeline-content">
+                            <span class="time">3:00pm</span>
+                            <h3>Recepción</h3>
+                            <p>Casa de Familia Garcia</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="timeline-content">
+                            <span class="time">4:00pm</span>
+                            <h3>Hora de Comida</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i class="fas fa-music"></i></div>
+                        <div class="timeline-content">
+                            <span class="time">7:00pm</span>
+                            <h3>Exceso y descontrol...</h3>
+                            <p>Pista principal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUNTDOWN -->
+        <section class="section-card countdown-section">
+            <div class="container">
+                <div class="countdown-decoration">
+                    <span class="line"></span>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-infinity"></i>
+                    <i class="fas fa-heart"></i>
+                    <span class="line"></span>
+                </div>
+                <h2>Faltan para el gran día</h2>
+                <div class="countdown-timer" id="countdown">
+                    <div class="countdown-item"><span id="days">000</span><span>Días</span></div>
+                    <div class="countdown-item"><span id="hours">00</span><span>Horas</span></div>
+                    <div class="countdown-item"><span id="minutes">00</span><span>Minutos</span></div>
+                    <div class="countdown-item"><span id="seconds">00</span><span>Segundos</span></div>
+                </div>
+                <p class="countdown-message"><i class="fas fa-calendar-check"></i> Sábado 7 de Noviembre, 2026</p>
+            </div>
+        </section>
+
+        <!-- RSVP CON ÁRBOL -->
+        <section class="section-card rsvp-tree-section">
+            <div class="container">
+                <h2><i class="fas fa-leaf"></i> Confirma tu asistencia</h2>
+                <p class="rsvp-description">Cada confirmación hará crecer una hoja en nuestro árbol del amor</p>
+                
+                <form id="rsvpTreeForm" class="rsvp-tree-form">
+                    <div class="form-group">
+                        <input type="text" id="guestFullName" placeholder="Tu nombre completo" required>
+                    </div>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-check-circle"></i> Confirmar asistencia
+                    </button>
+                </form>
+                
+                <div class="tree-container">
+                    <svg id="loveTree" viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; height: auto;">
+                        <defs>
+                            <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#4a3020"/>
+                                <stop offset="25%" stop-color="#6b4c3a"/>
+                                <stop offset="50%" stop-color="#7a5a45"/>
+                                <stop offset="75%" stop-color="#6b4c3a"/>
+                                <stop offset="100%" stop-color="#4a3020"/>
+                            </linearGradient>
+                            <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#6b4c3a"/>
+                                <stop offset="100%" stop-color="#4a3020"/>
+                            </linearGradient>
+                            <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+                                <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#00000030"/>
+                            </filter>
+                            <pattern id="barkPattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                                <path d="M0 8 Q15 3 30 8 M0 18 Q15 13 30 18 M0 28 Q15 23 30 28" stroke="#3a2215" stroke-width="0.8" fill="none" opacity="0.3"/>
+                                <path d="M8 0 Q13 15 8 30 M18 0 Q23 15 18 30 M28 0 Q23 15 28 30" stroke="#3a2215" stroke-width="0.6" fill="none" opacity="0.2"/>
+                            </pattern>
+                            <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+                                <stop offset="0%" stop-color="#fef8f0"/>
+                                <stop offset="100%" stop-color="#f0e8dd"/>
+                            </radialGradient>
+                        </defs>
+                        
+                        <rect width="800" height="700" fill="url(#bgGrad)" rx="20"/>
+                        
+                        <circle cx="150" cy="150" r="60" fill="#d4af37" opacity="0.03"/>
+                        <circle cx="650" cy="200" r="80" fill="#d4af37" opacity="0.03"/>
+                        <circle cx="400" cy="100" r="100" fill="#d4af37" opacity="0.02"/>
+                        
+                        <ellipse cx="400" cy="650" rx="380" ry="50" fill="#3d6b2e" opacity="0.25"/>
+                        <ellipse cx="400" cy="640" rx="300" ry="30" fill="#4a7a35" opacity="0.35"/>
+                        
+                        <g opacity="0.7">
+                            <circle cx="180" cy="645" r="4" fill="#ffd6e8"/>
+                            <circle cx="176" cy="642" r="3" fill="#ffb6d1"/>
+                            <circle cx="184" cy="642" r="3" fill="#ffb6d1"/>
+                            <circle cx="180" cy="648" r="3" fill="#ffb6d1"/>
+                            <circle cx="180" cy="645" r="2" fill="#ffeb3b"/>
+                            <circle cx="620" cy="648" r="4" fill="#ffd6e8"/>
+                            <circle cx="616" cy="645" r="3" fill="#ffb6d1"/>
+                            <circle cx="624" cy="645" r="3" fill="#ffb6d1"/>
+                            <circle cx="620" cy="651" r="3" fill="#ffb6d1"/>
+                            <circle cx="620" cy="648" r="2" fill="#ffeb3b"/>
+                            <circle cx="400" cy="655" r="3" fill="#ffe4b5"/>
+                            <circle cx="397" cy="653" r="2" fill="#ffd700"/>
+                            <circle cx="403" cy="653" r="2" fill="#ffd700"/>
+                            <circle cx="400" cy="657" r="2" fill="#ffd700"/>
+                            <circle cx="400" cy="655" r="1.5" fill="#ffeb3b"/>
+                        </g>
+                        
+                        <g filter="url(#softShadow)">
+                            <path d="M360 640 Q330 660 300 675" stroke="url(#branchGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
+                            <path d="M440 640 Q470 660 500 675" stroke="url(#branchGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
+                            <path d="M380 645 Q355 670 345 680" stroke="url(#branchGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+                            <path d="M420 645 Q445 670 455 680" stroke="url(#branchGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        </g>
+                        
+                        <g filter="url(#softShadow)">
+                            <path d="M370 650 Q355 550 360 450 Q365 370 380 340" stroke="url(#trunkGrad)" stroke-width="55" fill="none" stroke-linecap="round"/>
+                            <path d="M370 650 Q355 550 360 450 Q365 370 380 340" stroke="url(#barkPattern)" stroke-width="55" fill="none" stroke-linecap="round"/>
+                        </g>
+                        
+                        <g filter="url(#softShadow)">
+                            <path d="M360 530 Q310 500 250 490 Q210 485 180 500" stroke="url(#branchGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+                            <path d="M363 470 Q300 430 240 410 Q200 400 160 420" stroke="url(#branchGrad)" stroke-width="17" fill="none" stroke-linecap="round"/>
+                            <path d="M370 420 Q320 380 270 350 Q240 335 210 345" stroke="url(#branchGrad)" stroke-width="13" fill="none" stroke-linecap="round"/>
+                            <path d="M375 390 Q340 350 310 310 Q290 290 270 295" stroke="url(#branchGrad)" stroke-width="9" fill="none" stroke-linecap="round"/>
+                            <path d="M378 370 Q360 340 340 310 Q325 290 315 285" stroke="url(#branchGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        </g>
+                        
+                        <g filter="url(#softShadow)">
+                            <path d="M390 530 Q440 500 500 490 Q540 485 570 500" stroke="url(#branchGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+                            <path d="M387 470 Q450 430 510 410 Q550 400 590 420" stroke="url(#branchGrad)" stroke-width="17" fill="none" stroke-linecap="round"/>
+                            <path d="M382 420 Q430 380 480 350 Q510 335 540 345" stroke="url(#branchGrad)" stroke-width="13" fill="none" stroke-linecap="round"/>
+                            <path d="M380 390 Q410 350 440 310 Q460 290 480 295" stroke="url(#branchGrad)" stroke-width="9" fill="none" stroke-linecap="round"/>
+                            <path d="M379 370 Q395 340 415 310 Q430 290 440 285" stroke="url(#branchGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        </g>
+                        
+                        <g filter="url(#softShadow)">
+                            <path d="M382 365 Q388 330 395 290 Q400 260 405 240" stroke="url(#branchGrad)" stroke-width="11" fill="none" stroke-linecap="round"/>
+                            <path d="M384 355 Q415 320 435 290 Q448 270 455 255" stroke="url(#branchGrad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                            <path d="M378 355 Q345 320 325 290 Q312 270 305 255" stroke="url(#branchGrad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        </g>
+                        
+                        <g stroke="#7a5a45" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8">
+                            <path d="M180 500 Q165 490 155 485"/>
+                            <path d="M180 500 Q170 510 160 515"/>
+                            <path d="M160 420 Q145 410 135 405"/>
+                            <path d="M210 345 Q195 335 185 330"/>
+                            <path d="M270 295 Q255 285 245 280"/>
+                            <path d="M315 285 Q300 275 290 270"/>
+                            <path d="M570 500 Q585 490 595 485"/>
+                            <path d="M590 420 Q605 410 615 405"/>
+                            <path d="M540 345 Q555 335 565 330"/>
+                            <path d="M480 295 Q495 285 505 280"/>
+                            <path d="M440 285 Q455 275 465 270"/>
+                            <path d="M405 240 Q412 230 418 225"/>
+                            <path d="M455 255 Q465 245 472 240"/>
+                            <path d="M305 255 Q295 245 288 240"/>
+                        </g>
+                        
+                        <g fill="#4a7a35" opacity="0.4">
+                            <ellipse cx="345" cy="540" rx="15" ry="8"/>
+                            <ellipse cx="410" cy="580" rx="18" ry="9"/>
+                            <ellipse cx="360" cy="480" rx="12" ry="6"/>
+                            <ellipse cx="430" cy="520" rx="14" ry="7"/>
+                            <ellipse cx="350" cy="610" rx="13" ry="6"/>
+                        </g>
+                        
+                        <g fill="#5a8f4c" opacity="0.3">
+                            <path d="M170 485 Q175 475 180 485 Q175 480 170 485Z"/>
+                            <path d="M590 415 Q595 405 600 415 Q595 410 590 415Z"/>
+                            <path d="M240 275 Q245 265 250 275 Q245 270 240 275Z"/>
+                            <path d="M520 275 Q525 265 530 275 Q525 270 520 275Z"/>
+                        </g>
+                        
+                        <g transform="translate(400, 560)" opacity="0.7">
+                            <path d="M0 -8 Q0 -15 6 -15 Q12 -15 12 -8 Q12 -2 6 6 Q0 -2 0 -8Z" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                        </g>
+                        
+                        <text x="400" y="50" text-anchor="middle" font-family="'Playfair Display', serif" font-size="16" fill="#8b7355" font-style="italic" opacity="0.8">🌿 Cada hoja, un corazón que florece con tu amor 🌿</text>
+                        <text x="400" y="685" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="12" fill="#a89080" opacity="0.6">7 · Noviembre · 2026</text>
+                    </svg>
+                    
+                    <div class="leaves-container" id="leavesContainer"></div>
+                </div>
+                
+                <div class="guest-counter" id="guestCounter" style="display: none;">
+                    <h3><i class="fas fa-users"></i> Total de invitados: <span id="totalGuests">0</span></h3>
+                    <p>Confirmaciones: <span id="totalConfirmations">0</span></p>
+                </div>
+            </div>
+        </section>
+
+
+    <!-- MESA DE REGALOS - LIVERPOOL -->
+            <section class="section-card gift-section">
+                <div class="container">
+                    <div class="gift-card">
+                        <div class="gift-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h2>Mesa de Regalos</h2>
+                        <p class="gift-intro">
+                            Tu presencia es nuestro mejor regalo,<br>
+                            pero si deseas obsequiarnos algo más...
+                        </p>
+                        <div class="gift-store-card">
+                            <div class="store-logo">
+                                <i class="fas fa-store"></i>
+                               
+                            </div>
+                            <h3>Mesa de Regalos</h3>
+                            <p>Encuentra nuestra lista de regalos en línea</p>
+                            <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51969498" 
+                            target="_blank" 
+                            class="btn-gift">
+                                <i class="fas fa-search"></i> Ver lista de regalos
+                            </a>
+                            <p class="gift-note">
+                                <i class="fas fa-qrcode"></i> 
+                                O escanea el código QR
+                            </p>
+                            <div class="qr-code">
+                                <img src="img/qr.jpeg" alt="Código QR mesa de regalos">
+                                <p>Escanea para ver nuestra lista</p>
+                            </div>
+                        </div>
+                        <p class="gift-thanks">
+                            ¡Gracias por tu generosidad y cariño!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIDEO DIVERTIDO -->
+        <section class="video-section scroll">
+            <p class="aviso-humor">🛑 Por favor, tómate este video con humor, fue hecho para entretener 😂</p>
+            <video id="video-divertido" width="100%" controls poster="img/polloypao.jpeg">
+                <source src="video/adame.mp4" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+        </section>
+
+        <!-- SUBIR FOTOS -->
+        <section class="section-card upload-section">
+            <div class="container">
+                <h2><i class="fas fa-camera"></i> Sube tus Fotos</h2>
+                <p class="upload-description">Comparte tus mejores momentos de la boda</p>
+                <div class="upload-container">
+                    <div class="upload-header">
+                        <div class="user-info">
+                            <label for="guestName">Tu nombre *</label>
+                            <input type="text" id="guestName" placeholder="Ej: María García" class="guest-name-input">
+                            <small>Tu nombre aparecerá en las fotos</small>
+                        </div>
+                    </div>
+                    <div class="dropzone" id="dropzone">
+                        <div class="dropzone-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Haz clic aquí para seleccionar una foto de tu galeria</p>
+                            <small>una vez seleccionada dale click en subir foto<br>mira el collage mas abajo</small>
+                        </div>
+                        <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/gif,image/webp">
+                    </div>
+                    <div class="preview-grid" id="previewGrid"></div>
+                        <div class="add-more-btn" id="addMoreBtn">
+                                <i class="fas fa-plus-circle"></i>
+                            <span>Agregar más fotos</span>
+                            <span>Puedes Agregar hasta 5 fotos</span>
+                        </div>
+                    <div class="upload-actions">
+                        <button class="btn btn-upload" id="submitUpload">Subir Fotos al Collage</button>                
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+<!-- GALERÍA DE FOTOS DE INVITADOS -->
+<section class="section-card guest-gallery-section" style="text-align: center;">
+    <div class="container" style="text-align: center; width: 100%; display: block;">
+        <h2 style="text-align: center; display: block; width: 100%;"><i class="fas fa-heart"></i> Collage</h2>
+        
+        <p class="gallery-description" style="text-align: center; display: block; width: 100%; margin: 0 auto 2rem auto; position: relative; left: 0; right: 0;">
+            ¡Cada foto es un recuerdo especial que nos regalan!
+        </p><br>
+        
+        <div class="gallery-deck" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+            <div class="deck-container" id="guestPhotosDeck" style="margin: 0 auto;"></div>
+            <div class="gallery-instruction" style="text-align: center; margin-top: 1rem; width: 100%;"><br><br>
+                <i class="fas fa-arrows-left-right"></i>
+                <p>Desliza para ver más fotos de nuestros invitados</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- MÚSICA -->
+        <div class="music-player">
+            <button class="music-toggle" id="musicToggle"><i class="fas fa-music"></i></button>
+            <audio id="weddingMusic" loop><source src="audio/sax.mp3" type="audio/mpeg"></audio>
+        </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="js/curtain.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/upload.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/rsvp-tree-complete.js"></script>
+</body>
+</html>

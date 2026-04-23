@@ -1,0 +1,350 @@
+/* ================================
+   EFECTOS · CORTINA · GALERÍA 3D · FONDOS
+================================ */
+
+/* ----- CORTINA ----- */
+#curtain-trigger {
+    height: 300vh;
+    width: 100%;
+}
+
+.curtain-effect {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+    overflow: visible; /* 🔥 CAMBIA DE 'hidden' a 'visible' */
+}
+
+.curtain-left,
+.curtain-right {
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: 100%;
+    transition: transform 0.2s linear;
+    overflow: hidden;
+    pointer-events: none; /* ✅ AÑADE ESTA LÍNEA */
+}
+
+.curtain-left {
+    left: 0;
+    z-index: 2;
+}
+
+.curtain-right {
+    right: 0;
+    z-index: 1;
+}
+
+.curtain-left img,
+.curtain-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+     pointer-events: none; /* ✅ AÑADE ESTA LÍNEA */
+}
+
+.scroll-indicator {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #5a6e46;
+    text-align: center;
+    z-index: 1001;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-arrow i { animation: none !important; }
+    .curtain-left, .curtain-right { transition: none; }
+}
+
+.invitation-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.invitation-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ----- PORTADA CON PARALLAX ----- */
+.cover-section {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.cover-image {
+    position: absolute;
+    top: -5%;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-image: url('../img/campo boda.png');
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: transform 0.05s linear;
+}
+
+.cover-overlay {
+    position: absolute;
+    bottom: 2%;
+    left: 28%;
+    color: rgb(241, 239, 237);
+    text-shadow: 0 2px 8px rgba(243, 242, 238, 0.559);
+    z-index: 2;
+}
+
+.cover-overlay .event-type {
+    color: #c1952f94 !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.cover-overlay .couple-names {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ----- GALERÍA 3D ----- */
+.gallery-deck {
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .gallery-deck { height: 420px; }
+}
+
+.deck-container {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.deck-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 350px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(49, 48, 48, 0.397);
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.deck-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .deck-card { width: 220px; height: 310px; }
+}
+
+.gallery-instruction {
+    text-align: center;
+    margin-top: 3rem;
+    color: #5a6e46;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+/* ----- ANIMACIONES ----- */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+}
+
+.scroll-arrow i { animation: bounce 2s infinite; }
+.fade-in { animation: fadeIn 0.5s ease; }
+
+/* ===== FONDOS POR SECCIÓN ===== */
+
+/* BASE */
+.itinerary-section,
+.countdown-section,
+.gift-section,
+.upload-section,
+.guest-gallery-section,
+.video-section,
+.rsvp-tree-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Parallax para secciones seleccionadas */
+.itinerary-section::before,
+.countdown-section::before,
+.gift-section::before,
+.video-section::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    will-change: transform;
+    transition: transform 0.05s linear;
+}
+
+/* 1. Mensaje principal */
+.message-card {
+    background-image: url('../img/fondo6.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    background-color: #f9f5f0;
+}
+
+/* 2. Ceremonia Iglesia */
+.ceremony-section .ceremony-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    background-image: url('../img/89216.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+/* 2. Ceremonia Iglesia */
+#ceremonia-iglesia .ceremony-overlay {
+    background: rgba(59, 75, 33, 0.5);
+    background-image: url('../img/89216.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+/* 3. Celebración Salón - AHORA SÍ CAMBIA SOLO ESTA */
+#ceremonia-salon .ceremony-overlay {
+    background: rgba(59, 75, 33, 0.5);
+    background-image: url('../img/fondo7.png');  /* ← CAMBIA AQUÍ */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+/* 4. Itinerario */
+.itinerary-section::before {
+    background-image: url('../img/fondo1.png');
+}
+.itinerary-section {
+    background: none;
+}
+
+/* 5. Countdown */
+.countdown-section::before {
+    background-image: url('../img/fondo6.png');
+}
+.countdown-section {
+    background: none;
+}
+
+/* 6. RSVP / Árbol */
+.rsvp-tree-section {
+    background-image: url('../img/fondo7.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 7. Mesa de Regalos */
+.gift-section::before {
+    background-image: url('../img/fondo8.png');
+    background-size: contain;
+}
+.gift-section {
+    background: none;
+}
+
+/* 8. Subir Fotos */
+.upload-section {
+    background-image: url('../img/fondo8.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 9. Galería / Collage */
+.guest-gallery-section {
+    background-image: url('../img/marco.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f9f5f0;
+}
+
+/* 10. Video */
+.video-section::before {
+    background-image: url('../img/fondo8.png');
+}
+.video-section {
+    background: none;
+    padding: 1.5rem 1rem;
+    margin: 1rem;
+}
+
+.video-section video {
+    max-width: 90%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 20px;
+}
+
+/* Eliminar backdrop-filter pesado */
+.ceremony-card {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 20px;
+    margin: 2rem 0;
+}
+
+/* Responsive móvil */
+@media (max-width: 768px) {
+    .message-card,
+    .ceremony-section .ceremony-overlay,
+    .rsvp-tree-section,
+    .upload-section,
+    .guest-gallery-section {
+        background-position: center;
+    }
+}
