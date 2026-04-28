@@ -19,12 +19,23 @@ class WeddingUI {
     }
 
     // ----- LÍNEA PROGRESIVA - DEFINITIVA -----
+// ----- LÍNEA PROGRESIVA - VERSIÓN ULTRALIGERA (sin crear/eliminar styles) -----
 setupTimelineProgress() {
+    const timeline = document.querySelector('.timeline-modern');
     const itinerarySection = document.querySelector('.itinerary-section');
     
-    if (!itinerarySection) return;
+    if (!timeline || !itinerarySection) return;
     
     let ticking = false;
+    let currentProgress = 0;
+    
+    // Creamos UN SOLO style al inicio
+    let progressStyle = document.getElementById('timeline-progress-style');
+    if (!progressStyle) {
+        progressStyle = document.createElement('style');
+        progressStyle.id = 'timeline-progress-style';
+        document.head.appendChild(progressStyle);
+    }
     
     const updateProgress = () => {
         const rect = itinerarySection.getBoundingClientRect();
@@ -37,19 +48,19 @@ setupTimelineProgress() {
         progress = distance / total;
         
         if (rect.bottom <= 0) progress = 1;
+        if (rect.top >= windowHeight) progress = 0;
         progress = Math.min(Math.max(progress, 0), 1);
         
-        const style = document.getElementById('timeline-progress-style');
-        if (style) style.remove();
-        
-        const newStyle = document.createElement('style');
-        newStyle.id = 'timeline-progress-style';
-        newStyle.textContent = `
-            .timeline-modern::after {
-                height: ${progress * 100}% !important;
-            }
-        `;
-        document.head.appendChild(newStyle);
+        // SOLO actualizamos si el progreso cambió significativamente
+        if (Math.abs(progress - currentProgress) > 0.01) {
+            currentProgress = progress;
+            // Actualizamos el style existente sin crear/eliminar
+            progressStyle.textContent = `
+                .timeline-modern::after {
+                    height: ${progress * 100}% !important;
+                }
+            `;
+        }
         
         ticking = false;
     };
@@ -61,11 +72,12 @@ setupTimelineProgress() {
         }
     };
     
-    window.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', updateProgress);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+        requestAnimationFrame(updateProgress);
+    });
     updateProgress();
-}
-    
+}    
     // ----- COUNTDOWN CON MENSAJES DINÁMICOS -----
     initCountdown() {
         const misaDate = new Date('2026-11-07T13:00:00').getTime();
