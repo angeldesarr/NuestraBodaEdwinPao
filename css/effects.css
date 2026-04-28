@@ -22,9 +22,10 @@
     top: 0;
     width: 95%;
     height: 100%;
-    transition: transform 0.2s linear;  /* ← ESTA ES LA LÍNEA A ELIMINAR */
+    /* transition: transform 0.2s linear;  ← ELIMINADA */
     overflow: hidden;
     pointer-events: none;
+    will-change: transform; /* ← NUEVA: ayuda al navegador a optimizar */
 }
 
 .curtain-left {
